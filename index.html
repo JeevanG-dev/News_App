@@ -11,17 +11,22 @@
     <div id="app">
         <header>
             <span class="menu-btn" id="menu-btn">𝌬</span>
-            <span>New App</span>
+            <span>News App</span>
             <div id="nav-bar" class="nav-bar"></div>
             <button id="toggle-mode" class="toggle-btn">☀️</button>
         </header>
-        <div id="nav-drawer" class="nav-drawer">
+        <nav id="nav-drawer" class="nav-drawer">
             <div class="drawer-header">
                 <h3>Categories</h3>
                 <button id="close-drawer-btn" class="close-drawer-btn">❌</button>
             </div>
             <div id="drawer-bar"></div>
-        </div>
+        </nav>
+
+        <main id="news-container" class="news-container"></main>
+
+        <div id="error" class="error hidden">Failed to load news. Please try again</div>
+
     </div>
 
     <script src="index.js"></script>
