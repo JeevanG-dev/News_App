@@ -12,6 +12,9 @@ let currentPage = 1;
 let pageSize = 12;
 let isloading = false;
 let apiKey = "ec5e0ad87f3f445f9c9321b119bb69b3";
+let searchQuery = "";
+
+
 
 const navDrawer = document.getElementById("nav-drawer");
 const navBar = document.getElementById("nav-bar");
@@ -21,6 +24,8 @@ const newsContainer = document.getElementById("news-container")
 const errorDiv = document.getElementById("error");
 const menuBtn = document.getElementById("menu-btn")
 const closeDrawerBtn = document.getElementById("close-drawer-btn")
+const searchInput = document.getElementById("search-input")
+
 
 
 
@@ -42,6 +47,15 @@ closeDrawerBtn.addEventListener("click",()=>{
   navDrawer.classList.remove("show")
 })
 
+searchInput.addEventListener("input",(e)=>{
+
+  searchQuery = e.target.value;
+  currentPage  = 1;
+  newsContainer.innerHTML = "";
+  fatchNews()
+
+})
+
 
 
 async function fatchNews() {
@@ -50,8 +64,13 @@ async function fatchNews() {
   errorDiv.classList.add("hidden");
 
   try {
+
+    const queryParam = (searchQuery.length > 0)  ? `&q=${searchQuery}` : `&category=${currentCategory}`
+
+
+
     const respone = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&page=${currentPage}&pageSize=${pageSize}&category=${currentCategory}&apikey=${apiKey}`
+      `https://newsapi.org/v2/top-headlines?country=us&page=${currentPage}&pageSize=${pageSize}${queryParam}&apikey=${apiKey}`
     );
     const data = await respone.json();
     displayNews(data.articles);
